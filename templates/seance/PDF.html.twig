@@ -1,0 +1,39 @@
+
+                    <h1 class="align-center">Bienvenue dans notre application</h1>
+
+                                <p>Voila la liste de tout les Seances</p>
+
+                <table class="table" border="5">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Nom_Restaurant</th>
+                        <th>Adresse_Restaurant</th>
+                        <th>Num_Tel_Restaurant</th>
+                        <th>Description_Restaurant</th>
+                       
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for seance in seances %}
+                        <tr>
+                            <td>{{ seance.idSeance }}</td>
+
+                      
+                           
+                        <td>{{ seance.typeSeance }}</td>
+                            <td>{{  seance.dureeSeance }}</td>
+                            <td>{{  seance.nbMaximal }}</td>
+                            <td>{{ seance.dateFin|date('Y-m-d') }}</td>
+                           <td><img src="{{ asset('Photos/'~ seance.categorie) }}" width="250" height="150"></td>
+                           
+     
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>

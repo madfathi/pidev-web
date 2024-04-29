@@ -1,0 +1,6 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+statistics:
+    path: /statistics
+    controller: App\Controller\SeanceController::statistics

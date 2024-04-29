@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+ {% block contentsq %}
+ 
+     <table class="table">
+        <thead>
+            <tr>
+                <th>Id_Reservation</th>
+                <th>Type_Reservation</th>
+                <th>Username</th>
+                <th>email</th>
+                <th>phone</th>
+            
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+        
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.typeReservation }}</td>
+                <td>{{ reservation.username }}</td>
+                <td>{{ reservation.email }}</td>
+                <td>{{ reservation.phone }}</td>
+             
+
+                   
+  <td>
+        <a href="{{ path('app_reservation_edit', {'id': reservation.idReservation }) }}" class="btn btn-success" >
+    <i class="fas fa-edit"></i> Edit
+</a>
+<a href="{{ path('app_reservation_delete', { 'id': reservation.id }) }}" class="btn btn-danger" style="display: inline-block;">
+    <i class="fas fa-trash-alt"></i> Delete
+</a>
+        </td>
+
+              
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ {% endblock %}
+ {% block formSeance %}
+ {% endblock %}
+  {% block bodyse %}
+ {% endblock %}

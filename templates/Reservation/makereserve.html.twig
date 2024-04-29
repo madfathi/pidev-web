@@ -1,0 +1,137 @@
+
+
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/animated-headline.css">
+	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/slick.css">
+	<link rel="stylesheet" href="assets/css/nice-select.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+<section class="contact-form-main">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-xl-7 col-lg-7">
+                <div class="form-wrapper">
+                    <div class="form-tittle">
+                        <div class="row">
+                            <div class="col-lg-11 col-md-10 col-sm-10">
+                                <div class="section-tittle">
+                                    <span>Contact Form</span>
+                                    <h2>Feel Free to contact with us!</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <form id="contact-form" action="{{ path('reservation_new', {'idSeance': idSeance}) }}" method="POST" class="row" novalidate>
+                        {{ form_start(form) }}
+                      <div class="col-md-6">
+   {{ form_label(form.typeReservation, 'Type Reservation', {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 30px;'}}) }}
+   {{ form_errors(form.typeReservation, {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 25px;'}}) }}
+    {{ form_widget(form.typeReservation, {'attr': {'class': 'form-control' ~ (form.typeReservation.vars.errors|length ? ' is-invalid' : '')}}) }}
+</div>
+
+
+   <div class="col-md-6">
+    {{ form_label(form.username, 'Username', {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 30px;'}}) }}
+    {{ form_errors(form.username) }}
+    {{ form_widget(form.username) }}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.phone, 'phone', {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 30px;'}}) }}
+    {{ form_errors(form.phone) }}
+    {{ form_widget(form.phone) }}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.email, 'email', {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 30px;'}}) }}
+    {{ form_errors(form.email) }}
+    {{ form_widget(form.email) }}
+</div>
+<div class="col-md-6">
+    {{ form_label(form.recaptcha, 'code captcha', {'label_attr': {'class': 'form-label', 'style': 'color: black; font-size: 30px;'}}) }}
+    {{ form_errors(form.recaptcha) }}
+    {{ form_widget(form.recaptcha) }}
+</div>
+<div class="col-md-6" style="display: none;">
+    {{ form_row(form.idSeance, {'attr': {'class': 'form-control mb-3'}}) }}
+</div>
+<div class="col-md-12">
+    <div class="submit-info">
+        <button class="btn btn-primary" type="submit" onclick="validateForm()" >Reserver</button>
+    </div>
+</div>
+                        {{ form_end(form) }}
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="from-left d-none d-lg-block">
+        <img src="asset/img/gallery/contact_form.png" alt="">
+    </div>
+     <style>
+ 
+</style>
+<style>
+    .is-invalid {
+        border-color: red;
+    }
+
+    .invalid-feedback {
+        color: red;
+    }
+
+    .error-message {
+    color: red; /* Set the color to red or any other color you prefer */
+    font-size: 20px; /* Set the font size to 20px or any other size you prefer */
+}
+
+</style>
+
+<script>
+function sendEmail() {
+  fetch('/test-email') // Assurez-vous de remplacer '/send-email' par l'URL de votre endpoint Symfony
+        .then(response => {
+            if (response.ok) {
+                alert('Email envoyé avec succès !');
+            } else {
+                alert('Une erreur s\'est produite lors de l\'envoi de l\'email.');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite :', error);
+            alert('Une erreur s\'est produite lors de l\'envoi de l\'email.');
+        });
+}
+function validateForm() {
+    var form = document.getElementById('contact-form');
+    if (form.checkValidity()) {
+        fetch('/test-email') // Assurez-vous de remplacer '/send-email' par l'URL de votre endpoint Symfony
+        .then(response => {
+            if (response.ok) {
+                alert('Email envoyé avec succès !');
+            } else {
+                alert('Une erreur s\'est produite lors de l\'envoi de l\'email.');
+            }
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite :', error);
+            alert('Une erreur s\'est produite lors de l\'envoi de l\'email.');
+        });
+        return true; // Allow the form to be submitted
+    } else {
+        return false; // Prevent the form from being submitted
+    }
+}
+</script>
+
+<script>
+
+</script>
+</section>
