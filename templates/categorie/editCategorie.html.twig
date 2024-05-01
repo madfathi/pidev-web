@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/back/assets/css/styles.css">  
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+     <div class="container-scroller">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand ps-3" href="index.html">Dashboard</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            {# <a class="nav-link" href="{{ path('dashboard') }}"> #}
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Actions</div>
+                            <a class="nav-link" href="{{ path('app_produit_ajouter') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                                Ajouter Produit
+                            </a>
+                            <a class="nav-link" href="{{ path('app_categorie_ajouter') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
+                                Ajouter Catégorie
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        <!-- partial -->
+       <div id="layoutSidenav_content">
+        <main>
+          <div class="content-wrapper">
+ <div class="row">
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+
+                    <h4 class="card-title">Ajouter catégorie</h4>
+                    <p class="card-description"></p>
+                   {% block body %}
+                   
+                   {{ form_start(form, {'attr': {'class': 'forms-sample'}}) }}
+                   <div class="form-group" >
+                   {{ form_label(form.nomcategorie, 'Nom de catégorie', {'attr': {'class': 'form-control-label'}}) }}
+                   {{ form_widget(form.nomcategorie, {'attr': {'class': 'form-control', 'placeholder': 'Nom de catégorie'}}) }}
+                   </div>
+                   <div class="form-group">
+                   {{ form_label(form.imagecategorie, 'Image', {'attr': {'class': 'form-control-label'}}) }}
+                   {{ form_widget(form.imagecategorie, {'attr': {'class': 'form-control-file'}}) }}
+                   </div>
+                   <button type="submit" class="btn btn-primary">Modifier</button>
+                   {{ form_end(form) }}
+                   {% endblock %}
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+              </main> 
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+         <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+            </div>
+          </footer>
+          {# <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="back/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="back/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="back/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="back/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="back/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="back/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="back/assets/js/off-canvas.js"></script>
+    <script src="back/assets/js/hoverable-collapse.js"></script>
+    <script src="back/assets/js/misc.js"></script>
+    <script src="back/assets/js/settings.js"></script>
+    <script src="back/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="back/assets/js/dashboard.js"></script>
+    <!-- End custom js for this page --> #}
+  </body>
+</html>

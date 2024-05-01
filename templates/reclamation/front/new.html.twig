@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Reclamation</title>
+
+		
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="/front/assets/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="/front/assets/bootstrap/css/bootstrap.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="/front/assets/css/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="/front/assets/css/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="/front/assets/css/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="/front/assets/css/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="/front/assets/css/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="/front/assets/css/responsive.css">
+</head>
+<body>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card" style="margin-top: 80px; padding: 30px;">
+      <div class="card-body">
+
+        <h1 class="text-center mb-5">Réclamer</h1>
+ 
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <div class="form-group">
+          {{ form_label(form.reference, 'Référence') }}
+          {{ form_widget(form.reference, {'attr': {'class': 'form-control'}}) }}
+          <div style="color:red"> {{ form_errors(form.reference,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.nomD) }}
+          {{ form_widget(form.nomD, {'attr': {'class': 'form-control'}}) }}
+           <div style="color:red"> {{ form_errors(form.nomD,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.prenomD, 'Prénom') }}
+          {{ form_widget(form.prenomD, {'attr': {'class': 'form-control'}}) }}
+            <div style="color:red"> {{ form_errors(form.prenomD,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.cin, 'CIN') }}
+          {{ form_widget(form.cin, {'attr': {'class': 'form-control'}}) }}
+            <div style="color:red"> {{ form_errors(form.cin,{'attr':{'class':'text-danger'}}) }}</div>
+            
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.email, 'Email') }}
+          {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+              <div style="color:red"> {{ form_errors(form.email,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.tel, 'Téléphone') }}
+          {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+              <div style="color:red"> {{ form_errors(form.tel,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+        <div class="form-group">
+          {{ form_label(form.commentaire, 'Commentaire') }}
+          {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+              <div style="color:red"> {{ form_errors(form.commentaire,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+         </br>  
+
+        <div class="form-group">
+          {{ form_label(form.file, 'Fichier') }}
+          {{ form_widget(form.file, {'attr': {'class': 'form-control-file'}}) }}
+              <div style="color:red"> {{ form_errors(form.file,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+
+         </br>  
+
+         
+
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+        </div>
+
+        {{ form_end(form) }}
+
+      </div>
+      <!-- end copyright -->
+	
+	<!-- jquery -->
+	<script src="/front/assets/js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="/front/assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="/front/assets/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="/front/assets/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="/front/assets/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="/front/assets/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="/front/assets/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="/front/assets/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="/front/assets/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="/front/assets/js/main.js"></script>
+
+<script src="/path/to/your/js/bootstrap.min.js"></script>
+</body>
+</html>

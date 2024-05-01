@@ -1,0 +1,102 @@
+{% block Partie2 %} 
+<div class="row">
+<div class="row">
+
+<table class="table table-bordered" style="margin-left: 10px; border: 1px solid black; border-collapse: collapse; padding: 5px;">
+
+
+<div class="card-body">
+ <link rel="stylesheet" href="{{ asset('assets2/css/style.css') }}">
+ <style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #e6e6e6;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+
+<table class="table table-bordered">
+     <thead class="table-dark">
+<tr>
+       <th scope="col">Référence</th>
+      <th scope="col">Nom</th>
+     <th scope="col">Prénom</th>
+     <th scope="col">CIN</th>
+    <th scope="col">Email</th>
+    <th scope="col">Téléphone</th>
+    <th scope="col">Commentaire</th>
+    <th scope="col">Date et heure </th>
+   <th scope="col">Note </th>
+    <th scope="col">Statut </th>
+
+    </tr>
+  </thead>
+    <tbody>
+{% for reclamation in reclamations %}
+    <tr>
+        <td>{{ reclamation.reference }}</td>
+        <td>{{ reclamation.nomD }}</td>
+        <td>{{ reclamation.prenomD }}</td>
+        <td>{{ reclamation.cin }}</td>
+        <td>{{ reclamation.email }}</td>
+        <td>{{ reclamation.tel }}</td>
+        <td>{{ reclamation.commentaire }}</td>
+        <td>{{ reclamation.CreatedAt|date('Y-m-d H:i') }}</td>
+
+<td>
+  {% if reclamation.reponses is not empty and reclamation.reponses.first.note is not null %}
+    {{ reclamation.reponses.first.note }}
+  {% else %}
+    N/A
+  {% endif %}
+</td>
+
+
+
+
+<td>
+  {% if reclamation.statut == 'En cours' %}
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">En cours...</span>
+    </div>
+  {% elseif reclamation.statut == 'approuvée' %}
+   <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Approuvée</span>
+    </div>
+  {% elseif reclamation.statut == 'refusée' %}
+     <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Refusée</span>
+    </div>
+  {% endif %}
+</td>
+
+
+
+
+              </br>
+                   </br>
+               
+
+    {% endfor %}
+    </tbody>
+</table>
+   </div>
+      </div>
+    
+</div>
+</div>
+{% endblock %}
+          

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Gestion des Réclamation
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div style="display: flex;align-items: center;justify-content: center;margin-top: 80px; padding:45px; margin-left:310px; padding:45px;">
+            <div class="card-body">
+                <canvas id="reclamation" width="400" height="150"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+                        integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+                        crossorigin="anonymous"></script>
+                <script>
+                    let reclamation = document.querySelector("#reclamation");
+                    let recGraph = new Chart(reclamation, {
+                        type: "pie",
+                        data: {
+                            labels: {{ statut|raw }},
+                            datasets: [{
+                                label: "Nombre de réclamation",
+                                data: {{ reclamationCount|raw }},
+                                backgroundColor: [
+                                    
+                                    '#66cc66',
+                                    '#ffd700',
+                                    '#ff6666'
+                                ]
+                            }]
+                        },
+                        options: {}
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Modifier la réclamation{% endblock %}
+
+{% block Partie2 %}
+   <div class="row">
+<div  style="display: flex;align-items: center;justify-content: center;margin-top: 80px; padding:30px; margin-left: 500px; padding:20px;">
+<div class="card-body">
+    <h1>Modifier la réclamation</h1>
+
+   {{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+
+ {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-primary" name="update_and_list">{{ 'Mettre à jour et retourner à la liste' }}</button>
+    </form>
+    
+    {% if app.request.method == 'POST' and app.request.request.has('update_and_list') %}
+        {% set redirectToPath = path('reclamation') %}
+        <script type="text/javascript">
+            window.location.href = "{{ redirectToPath }}";
+        </script>
+    {% endif %}
+                     </div>
+      </div>
+    
+</div>
+{% endblock %}
+
+
+

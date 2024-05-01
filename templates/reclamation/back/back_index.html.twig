@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Liste des réclamations</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/back/assets/css/styles.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Your navigation bar and side menu -->
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="content-wrapper" style="margin-top: 80px; display: flex; align-items: center; justify-content: center;">
+                    <div class="row">
+                        <!-- Your form and other content will go here -->
+                        <!-- This section will contain static data as an example. -->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Liste des réclamations</h4>
+                                    {# <a href="{{ path('reclamation_stat') }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sort-amount-up"></i>Stat</a> #}
+<a href="{{ path('app_tri_nom') }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sort-amount-up"></i>Trier par nom</a>
+ <div  class="table-responsive">
+           <input type="text" id="search" class="form-control" placeholder="Rechercher">
+    <div id="tabv">
+
+<table class="table table-bordered">
+     <thead class="table-dark">
+<tr>
+       <th scope="col">Référence</th>
+      <th scope="col">Nom</th>
+     <th scope="col">Prénom</th>
+     <th scope="col">CIN</th>
+    <th scope="col">Email</th>
+    <th scope="col">Téléphone</th>
+    <th scope="col">Commentaire</th>
+    <th scope="col">Date et heure </th>
+     <th scope="col">Documents </th>
+        <th scope="col">Note </th>
+    <th scope="col">Statut </th>
+    <th scope="col">Actions</th>
+      {# <th scope="col">Reponse</th> #}
+    </tr>
+  </thead>
+    <tbody>
+  {% for reclamation in reclamations %}
+
+    <tr>
+    {# <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg> #}
+{# <div id="flash-message-{{ reclamation.id }}" class="alert alert-dismissible fade show {% if reclamation.statut == 'En cours' %}alert-warning{% elseif reclamation.statut == 'approuvée' %}alert-success{% else %}alert-danger{% endif %}" role="alert"> #}
+    {# <span class="fa-stack fa-lg">
+        {% if reclamation.statut == 'En cours' %}
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+        {% elseif reclamation.statut == 'approuvée' %}
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        {% else %}
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-times fa-stack-1x fa-inverse"></i>
+        {% endif %}
+    </span> #}
+    {# {% if reclamation.statut == 'En cours' %}
+       <div class="alert alert-warning d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div> La réclamation "{{ reclamation.reference }}" est en cours de traitement.
+   </div>
+</div>
+    {% elseif reclamation.statut == 'approuvée' %}
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div> La réclamation "{{ reclamation.reference }}" a été approuvée.
+   </div>
+</div>
+        {% set session = app.request.session %}
+        {% set flashbag = session.getFlashBag() %}
+        {% set success_messages = flashbag.get('success') %}
+        {% for message in success_messages %}
+            {% if message['reference'] == reclamation.reference %}
+                {% set success_messages = success_messages|filter(message => message['reference'] != reclamation.reference) %}
+                {% set _ = flashbag.set('success', success_messages) %}
+            {% endif %}
+        {% endfor %}
+    {% elseif reclamation.statut == 'refusée' %}
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div> La réclamation "{{ reclamation.reference }}" a été refusée.
+   </div>
+</div>
+        {% set session = app.request.session %}
+        {% set flashbag = session.getFlashBag() %}
+        {% set success_messages = flashbag.get('success') %}
+        {% for message in success_messages %}
+            {% if message['reference'] == reclamation.reference %}
+                {% set success_messages = success_messages|filter(message => message['reference'] != reclamation.reference) %}
+                {% set _ = flashbag.set('success', success_messages) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeNotification({{ reclamation.id }})">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script>
+    function closeNotification(notificationId) {
+        var notification = document.querySelector("#flash-message-" + notificationId);
+        notification.remove();
+    }
+</script> #}
+</body>
+
+
+
+
+       <td>{{ reclamation.reference }}</td>
+                    <td>{{ reclamation.nomD }}</td>
+                    <td>{{ reclamation.prenomD }}</td>
+                    <td>{{ reclamation.cin }}</td>
+                    <td>{{ reclamation.email }}</td>
+                    <td>{{ reclamation.tel }}</td>
+                    <td>{{ reclamation.commentaire }}</td>
+                     <td>{{ reclamation.CreatedAt|date('Y-m-d H:i')}}</td>
+<td>
+    {% if reclamation.file is defined and reclamation.file %}
+        <a href="{{ asset('uploads/files/' ~ reclamation.file) }}" target="_blank">
+            <button type="button" class="btn btn-warning">Ouvrir le document</button>
+        </a>
+    {% else %}
+        Aucun fichier
+    {% endif %}
+</td>
+<td>
+  {% if reclamation.reponses is not empty and reclamation.reponses.first.note is not null %}
+    {{ reclamation.reponses.first.note }}
+  {% else %}
+    N/A
+  {% endif %}
+</td>
+                        <td>{{ reclamation.statut }}</td>
+                        
+                  
+
+                   
+                    <td>
+                    {% if reclamation.statut=="En cours" %}
+                   <button class="btn btn-success" onclick="window.location.href='{{ path('reclamation_approuver', {'id': reclamation.id}) }}'">Approuver</button>
+                    <button class="btn btn-danger" onclick="window.location.href='{{ path('reclamation_refuser', {'id': reclamation.id}) }}'">Refuser</button>
+                     {% elseif reclamation.statut=="approuvée" %}
+                     <button class="btn btn-danger" onclick="window.location.href='{{ path('reclamation_refuser', {'id': reclamation.id}) }}'">Refuser</button>
+                    {% elseif reclamation.statut=="refusée" %}
+                     <button class="btn btn-success" onclick="window.location.href='{{ path('reclamation_approuver', {'id': reclamation.id}) }}'">Approuver</button>
+                    
+                      {% endif %}
+                    
+                    </td>
+                      {# <td><button class="btn btn-success" onclick="window.location.href='{{ path('reponse_new', {'reference': reclamation.reference}) }}'">Repondre</button></td> #}
+                 
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+           </div>
+      </div>
+    
+</div>
+
+    <script src="{{ asset('https://code.jquery.com/jquery-3.5.1.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('#search').on('keyup', function() {
+            var query = $(this).val();
+            console.log(query);
+            $.ajax({
+                url: '{{ path('backrechercheAjax') }}',
+                type: 'GET',
+                data: { q: query },
+                    success: function(response) {
+                        console.log(response);
+                        $('#tabv').html($(response).find('#tabv').html());
+                }
+            });
+        });
+    });
+</script> 
+
+    <!-- Example Script to handle search or any other script you need -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+    <script>
+        // Example script to implement search functionality or any other interactions
+        // This needs to be developed based on your requirements
+    </script>
+</body>
+</html>
