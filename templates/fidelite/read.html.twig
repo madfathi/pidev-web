@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block contentsq %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>montant</th>
+                <th>code_promo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fidelite in fidelites %}
+                <tr>
+                    <td>{{ fidelite.id }}</td>
+                    <td>{{ fidelite.montant }}</td>
+                    <td>{{ fidelite.codePromo }}</td>
+                    <td>
+                        <a href="{{ path('app_fidelite_edit', {'id': fidelite.id }) }}" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a href="{{ path('app_fidelite_delete', { 'id': fidelite.id }) }}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('Are you sure you want to delete this item?');">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                         <a href="{{ path ('contrat_generate_pdf', { 'id':  fidelite.id }) }}" class="btn btn-primary">Download PDF</a></td>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block formFidelite %}
+    {# Vous pouvez intégrer ici un formulaire pour créer ou mettre à jour une entité Fidelite #}
+{% endblock %}
+
+{% block bodyse %}
+    {# Si nécessaire, vous pouvez ajouter du contenu spécifique ici #}
+{% endblock %}

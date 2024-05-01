@@ -1,0 +1,15 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_tri_nom:
+    path: '/tri-par-nom'
+    controller: 'App\Controller\UserController::triParNom'
+    methods: ['GET']
+# config/routes.yaml
+app_user_index:
+    path: /users
+    controller: App\Controller\UserController::index
+# config/routes.yaml
+app_forgot_password_request:
+    path: /forgot-password
+    controller: App\Controller\ForgotPasswordController::request

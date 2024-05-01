@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+ {% block bodyse %}
+ <div id="main">
+        <!-- Post -->
+        <section class="post">
+            <header class="major">
+                <span>   <h1 style="width: 200%;">Create new User</h1>
+</span>
+            </header>
+
+            <div class="section-content">
+              <div class="container">
+<div class="form-container">
+                {{ form_start(form , {'attr': {'class':'form-horizontal','novalidate':'novalidate'}} ) }}
+                <div class="col-md-12">
+               
+                    <fieldset>
+                     {{ form_row(form.nom, {
+    'attr': {
+        'placeholder': 'nom',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+    }
+}) }}
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset>
+                     {{ form_row(form.prenom, {
+    'attr': {
+        'placeholder': 'Prenom',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+    }
+}) }}
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset>
+                       {{ form_row(form.mdp, {
+    'attr': {
+        'placeholder': 'Mdp',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+    }
+}) }}
+</fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset>
+                       {{ form_row(form.email, {
+    'attr': {
+        'placeholder': 'Email',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+        }
+   }) }}
+   </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset>
+                       {{ form_row(form.role, {
+    'attr': {
+        'placeholder': 'Role',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+        }
+   }) }}
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+   <style>
+    .hidden-row {
+        display: none;
+    }
+</style>
+
+
+
+<div class="col-md-12">
+    <fieldset>
+      
+     
+    </fieldset>
+</div>
+           
+                </div>
+                <div class="col-md-12">
+                   <fieldset>
+    <button type="submit" class="btn btn-success" style="margin-top: 10px; margin-bottom: 20px;"> Reserver ! </button>
+</fieldset>
+                </div>
+  
+            
+
+                {{ form_end(form) }}
+                
+</div>
+            </div>
+             </div>
+        </section>
+ <script>
+ 
+ 
+
+       
+
+    </script>
+
+
+    </div>
+
+  {% endblock %}
+
+
+
+
+
+ 

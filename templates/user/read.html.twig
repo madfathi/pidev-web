@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>UrlImage</th>
+                <td><img style="width: 80px; height: 80px" src="{{ asset('images/' ~ user.urlImage ) }}"></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>NumTlfn</th>
+                <td>{{ user.numTlfn }}</td>
+            </tr>
+            <tr>
+                <th>AddEmail</th>
+                <td>{{ user.addEmail }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ user.status ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block contentsq %}
+    <a href="{{ path('app_user_add') }}" class="btn btn-primary">Ajouter User</a>
+    <button id="sortByNameBtn" class="btn btn-primary">Trier par Nom</button> <!-- Bouton de tri par nom -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>urlImage</th>
+                <th>cin</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>username</th>
+                <th>Password</th>
+                <th>email</th>
+                <th>roles</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.urlImage }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.roles }}</td>
+                    <td>
+                        <a href="{{ path('app_user_edit', {'id': user.id }) }}" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a href="{{ path('app_user_delete', { 'id': user.id }) }}" class="btn btn-danger" style="display: inline-block;">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                        <!-- Ajouter les autres actions ici -->
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+ {% block bodyse %}
+ <div id="main">
+        <!-- Post -->
+        <section class="post">
+            <header class="major">
+                <span>   <h1 style="width: 200%;">Create new User</h1>
+</span>
+            </header>
+
+            <div class="section-content">
+              <div class="container">
+<div class="form-container">
+                {{ form_start(form , {'attr': {'class':'form-horizontal','novalidate':'novalidate'}} ) }}
+                <div class="col-md-12">
+               
+                  <fieldset>
+    {{ form_label(form.montant, 'Montant', {'label_attr': {'class': 'custom-label'}}) }}
+    {{ form_widget(form.montant, {'attr': {'class': 'form-control'}}) }}
+    {% if form_errors(form.montant) %}
+        <div class="error-message">
+            {{ form_errors(form.montant) }}
+        </div>
+    {% endif %}
+</fieldset>
+                </div>
+
+                <div class="col-md-12">
+                <fieldset>
+    {{ form_label(form.code_promo, 'Code_promo', {'label_attr': {'class': 'custom-label'}}) }}
+    {{ form_widget(form.code_promo, {'attr': {'class': 'form-control'}}) }}
+    {% if form_errors(form.code_promo) %}
+        <div class="error-message">
+            {{ form_errors(form.code_promo) }}
+        </div>
+    {% endif %}
+</fieldset>
+
+
+                </div>
+
+                <div class="col-md-12">
+   <style>
+    .hidden-row {
+        display: none;
+    }
+</style>
+
+
+
+
+                </div>
+                <div class="col-md-12">
+                   <fieldset>
+    <button type="submit" class="btn btn-success" style="margin-top: 10px; margin-bottom: 20px;"> Ajouter ! </button>
+</fieldset>
+                </div>
+  
+            
+
+                {{ form_end(form) }}
+                
+</div>
+            </div>
+             </div>
+        </section>
+ <script>
+ 
+  
+}
+       
+
+    </script>
+
+
+    </div>
+
+  {% endblock %}
+
+
+  
+
+
+
+
+
+ 

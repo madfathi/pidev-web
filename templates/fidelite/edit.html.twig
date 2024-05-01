@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+ {% block bodyse %}
+ <div id="main">
+        <!-- Post -->
+        <section class="post">
+            <header class="major">
+                <span>   <h1 style="width: 200%;">Create new code promo</h1>
+</span>
+            </header>
+
+            <div class="section-content">
+              <div class="container">
+<div class="form-container">
+                {{ form_start(form , {'attr': {'class':'form-horizontal','novalidate':'novalidate'}} ) }}
+                <div class="col-md-12">
+               
+                    <fieldset>
+                     {{ form_row(form.montant, {
+    'attr': {
+        'placeholder': 'montant',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+    }
+}) }}
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset>
+                     {{ form_row(form.Code_promo, {
+    'attr': {
+        'placeholder': 'code_promo',
+        'class': 'custom-placeholder'
+    },
+    'label_attr': {
+        'class': 'custom-label'
+    }
+}) }}
+                    
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12">
+   <style>
+    .hidden-row {
+        display: none;
+    }
+</style>
+
+
+
+<div class="col-md-12">
+    <fieldset>
+      
+     
+    </fieldset>
+</div>
+           
+                </div>
+                <div class="col-md-12">
+                   <fieldset>
+    <button type="submit" class="btn btn-success" style="margin-top: 10px; margin-bottom: 20px;"> Ajouter ! </button>
+</fieldset>
+                </div>
+  
+            
+
+                {{ form_end(form) }}
+                
+</div>
+            </div>
+             </div>
+        </section>
+ <script>
+ 
+ 
+
+       
+
+    </script>
+
+
+    </div>
+
+  {% endblock %}
+
+
+
+
+
+ 
