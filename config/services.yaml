@@ -1,0 +1,32 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    # Définissez vos paramètres ici le cas échéant
+    # par exemple:
+    # app.locale: 'en'
+
+services:
+    # Configuration par défaut pour les services dans ce fichier
+    _defaults:
+        autowire: true      # Injecte automatiquement les dépendances dans vos services.
+        autoconfigure: true # Enregistre automatiquement vos services en tant que commandes, abonnés d'événements, etc.
+
+    # Définition du service SmsGenerator
+    App\Service\SmsGenerator:
+        # Configuration spécifique pour ce service
+        # Si le service a des arguments de constructeur, vous pouvez les spécifier ici
+        # par exemple:
+        # arguments:
+        #     $someParameter: '%app.some_parameter%'
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

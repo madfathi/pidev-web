@@ -1,0 +1,101 @@
+<style>
+ 
+.form-wrapper {
+    width: 100%; 
+    padding: 5px; 
+    background-color: #f9f9f9;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 20px; 
+    margin-bottom: 10px; 
+}
+
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.btn {
+    padding: 7px 12px; 
+    font-size: 18px; 
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-size: 40px; 
+    color: #007bff; 
+    margin-bottom: 10px; 
+    margin-left: 20px; 
+    font-family: 'Public Sans', sans-serif; 
+    font-weight: 600;
+}
+
+a {
+    color: #007bff; 
+    text-decoration: underline; 
+    display: inline-block;
+    font-family: Arial, sans-serif; 
+}
+
+a:hover {
+    text-decoration: none; 
+}
+</style>
+
+
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+    <div class="form-group">
+        {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nom, {'attr': {'class': 'text-danger'}}) }}
+       
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(form.pre, 'Pré', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.pre, {'attr': {'class': 'form-control'}}) }}
+        
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(form.mail, 'Email', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <br>
+    <div class="form-group">
+       {{ form_label(form.tel, 'Téléphone', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.tel, {'attr': {'class': 'text-danger'}}) }}
+        
+        
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form_label(form.addr, 'Adresse', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.addr, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Mise a Jour</button>
+{{ form_end(form) }}

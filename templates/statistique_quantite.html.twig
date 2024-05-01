@@ -1,0 +1,46 @@
+{# templates/statistique_quantite_produits.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistique Quantité Produits{% endblock %}
+
+{% block body %}
+    <h1>Statistique Quantité Produits</h1>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        {% for item in data %}
+                            "{{ item.nomProduit }}",
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: 'Quantité',
+                        data: [
+                            {% for item in data %}
+                                {{ item.quantite }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
