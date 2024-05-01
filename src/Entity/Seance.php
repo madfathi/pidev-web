@@ -53,7 +53,7 @@ private $idSeance;
      /**
  * @ORM\Column(type="string", length=255)
  
- */
+ */  
     private  $categorie ;
 
   /**
