@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des clients</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff; /* Bleu */
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2; /* Gris clair */
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Gris clair */
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue dans notre application</h1>
+    <p>Voici la liste de tous les client :</p>
+    <!-- Ajouter le logo "Cook Connect" -->
+    <img src="{{ absolute_url(asset('path/vers/votre/logo.png')) }}" alt="Cook Connect" style="width: 200px;">
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>IdC</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                <th>Poids</th>
+                <th>Hauteur</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in client %}
+                <tr>
+                    <td>{{ client.idC }}</td>
+                    <td>{{ client.nom }}</td>
+                    <td>{{ client.prenom }}</td>
+                    <td>{{ client.age }}</td>
+                    <td>{{ client.poids }}</td>
+                    <td>{{ client.hauteur }}</td>
+                    
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

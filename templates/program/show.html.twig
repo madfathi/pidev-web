@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program{% endblock %}
+
+{% block contentsq %}
+    <h1>Program</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdP</th>
+                <td>{{ program.idP }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ program.titre }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ program.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ program.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ program.prix }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/images/'~ program.image) }}" width="250" height="150"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_program_index') }}">back to list</a>
+
+    <a href="{{ path('app_program_edit', {'idP': program.idP}) }}">edit</a>
+
+    {{ include('program/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block title %}Program index{% endblock %}
+
+{% block body %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+    </div>
+      
+
+        <div style="max-height: 70vh; overflow-y: auto;">
+            <table id="datatablesSimple" class="table">
+                <thead>
+                    <tr>
+                    <th>IdP</th>
+                    <th>Titre</th>
+                    <th>Niveau</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Image</th>
+                    <th>Actions</th>                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for program in programs %}
+                        <tr>
+                            <td>{{ program.titre }}</td>
+                            <td>{{ program.niveau }}</td>
+                            <td>{{ program.description }}</td>
+                            <td>{{ program.prix }}</td>
+                            <td>
+                                <img src="{{ asset('uploads/images/' ~ program.image) }}" width="250" height="150">
+                            </td>
+                           
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

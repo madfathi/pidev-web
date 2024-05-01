@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program index{% endblock %}
+
+{% block contentsq %}
+<div class="card mb-4" style="width: 100vw; height: 100vh;">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+    </div>
+    <div class="card-body" style="height: calc(100vh - 60px); overflow: auto;">
+        <!-- Search Form -->
+        <form method="get">
+            <input type="text" name="search" placeholder="Search by Titre" value="{{ search }}">
+            <button type="submit">Search</button>
+        </form>
+      
+
+        <table id="datatablesSimple" style="width: 100%;">
+            <thead>
+              <div id='program-container' class="grid-container">
+                <tr>
+                    <th>IdP</th>
+                    <th>Titre</th>
+                    <th>Niveau</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+                </div>
+            </thead>
+           
+            <tbody>
+                {% if programs is not empty %}
+                    {% for program in programs %}
+                    {% if program.etat == 0 %}
+                        <tr>
+                            <td>{{ program.idP }}</td>
+                            <td>{{ program.titre }}</td>
+                            <td>{{ program.niveau }}</td>
+                            <td>{{ program.description }}</td>
+                            <td>{{ program.prix }}</td>
+                            <td>
+                               <td><img src="{{ asset('uploads/images/'~ program.image) }}" width="250" height="150"></td>
+                            </td>
+                            <td>
+                                <a href="{{ path('app_program_accept', {'idP': program.idP}) }}">Accept</a>
+                                <a href="{{ path('app_program_delete', {'idP': program.idP}) }}">Decline</a>
+                            </td>
+                        </tr>
+                                            {% endif %}
+
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No records found</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+    <div class="example-wrapper">
+    <div class="search-sort-container">
+        <div class="search-form">
+     
+
+        </div>
+        <div class="sort-dropdown">
+          <select id="sortSelect" class="btn btn-primary">
+    <option value="{{ path('tri_asc') }}" {% if app.request.attributes.get('_route') == 'tri_asc' %}selected{% endif %}>TRI CROISSANTE</option>
+    <option value="{{ path('tri_desc') }}" {% if app.request.attributes.get('_route') == 'tri_desc' %}selected{% endif %}>TRI DECROISSANTE</option>
+</select>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+{% block javascripts %}
+ <!-- jquery latest version -->
+    <script src={{ asset("assets/js/vendor/jquery-2.2.4.min.js") }}></script>
+    <!-- bootstrap 4 js -->
+    <script src={{ asset("assets/js/popper.min.js") }}></script>
+    <script src={{ asset("assets/js/bootstrap.min.js") }}></script>
+    <script src={{ asset("assets/js/owl.carousel.min.js") }}></script>
+    <script src={{ asset("assets/js/metisMenu.min.js") }}></script>
+    <script src={{ asset("assets/js/jquery.slimscroll.min.js") }}></script>
+    <script src={{ asset("assets/js/jquery.slicknav.min.js") }}></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+      ZC.LICENSE = [
+        "569d52cefae586f634c54f86dc99e6a9",
+        "ee6b7db5b51705a13dc2339db3edaf6d",
+      ];
+    </script>
+    <!-- all line chart activation -->
+    <script src={{ asset("assets/js/line-chart.js") }}></script>
+    <!-- all pie chart -->
+    <script src={{ asset("assets/js/pie-chart.js") }}></script>
+        <script src={{ asset("assets/js/bar-chart.js") }}></script>
+    <!-- others plugins -->
+    <script src={{ asset("assets/js/plugins.js") }}></script>
+    <script src={{ asset("assets/js/scripts.js") }}></script>
+
+<script>
+
+<script>
+
+$(document).ready(function() {
+    $('#searchinput').keyup(function () {
+        var searchTerm = $(this).val().trim();
+        
+        // Vérifiez si le champ de recherche n'est pas vide
+        if (searchTerm !== '') {
+            // Envoyer la requête Ajax
+            $.ajax({
+                url: '{{ path('app_program_search') }}', // Assurez-vous que cette route existe dans votre application Symfony
+                method: 'POST',
+                data: {name: searchTerm},
+                success: function(response) {
+                  
+                   $('#programs-container .grid-container').empty(); // Vider la liste actuelle des activités
+                  
+                     response.list.forEach(function(program) {
+                     
+            var activityHtml = '<div class="grid-item">' +
+                '<img src="{{ asset("/images/footer_blog_3.jpg") }}" alt="Activity Image">' +
+                '<a href="{{ path("app_program_show", {"idP": '+ program.idP +'}) }}">' +
+                '<h3>' + program.titre + '</h3>' +
+                '<p>Prix: ' + program.prix + '</p>' +
+                '<p>Description: ' + program.description + '</p>' +
+                '</a>' +
+                '<a href="{{ path("app_program_edit", {"idP": '+ program.idC +'}) }}" class="button-update">Modifier</a>' +
+                '<a href="{{ path("app_program_delete", {"idP": '+ program.idC +'}) }}" class="button-delete">Supprimer</a>' +
+                '</div>';
+            $('#programs-container .grid-container').append(activityHtml);
+            
+        });
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr, status, error); // Affichez les détails de l'erreur dans la console
+                    // Gérer les erreurs éventuelles
+                }
+            });
+        } else {
+            // Si le champ de recherche est vide, vider la liste des activités
+            $('#programs-container .grid-container').empty();
+        }
+    });
+});
+
+ </script>
+
+ 
+    <script>
+        $(document).ready(function() {
+            $('#sortSelect').change(function () {
+                var selectedOption = $(this).val();
+                
+                // Send AJAX request based on selected option
+                $.ajax({
+                    url: selectedOption, // Use the value of the selected option as the URL
+                    method: 'GET',
+                    success: function(response) {
+                        // Replace the contents of the programs container with the response
+                        $('#programs-container').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr, status, error); // Log any errors to the console
+                        // Handle errors if necessary
+                    }
+                });
+            });
+        });
+    </script>
+ 
+{% endblock %}

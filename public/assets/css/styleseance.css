@@ -1,0 +1,9 @@
+.custom-label {
+    margin-bottom: 10px; /* Ajustez la marge en fonction de vos besoins */
+}
+
+.custom-placeholder::placeholder {
+    /* Styles personnalisés pour le placeholder */
+    color: #999; /* Couleur du texte du placeholder */
+    font-style: italic; /* Style de police du placeholder */
+}

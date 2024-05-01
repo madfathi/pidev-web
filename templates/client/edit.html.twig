@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Client{% endblock %}
+ {% block formSeance %}
+
+{% endblock %}
+{% block header %}
+
+
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/styleseance.css') }}">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <style>
+        /* Your additional styles here */
+        .action-button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 10px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 0px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .show-button {background-color: #4CAF50;} 
+        .show-button:hover {background-color: #45a049;}
+
+        .edit-button {background-color: #008CBA;} 
+        .edit-button:hover {background-color: #0073e6;}
+
+        .delete-button {background-color: #f44336;} 
+        .delete-button:hover {background-color: #e60000;}
+    </style>
+{% endblock %}
+
+{% block contentsq %}
+    <h1>Edit Client</h1>
+
+
+{% if form is defined %}
+            {{ form_start(form, { 'attr':{'novalidate':'novalidate'  }}) }}
+
+           
+            
+            {{ form_end(form) }}
+        {% endif %}
+    <a href="{{ path('app_client_index') }}">back to list</a>
+
+
+{% endblock %}

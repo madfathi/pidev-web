@@ -1,0 +1,73 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block title %}Program index{% endblock %}
+
+{% block body %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+    </div>
+    <div class="card-body" style="overflow-x: auto;">
+        <form method="get">
+            <input type="text" name="search" placeholder="Search by Titre" value="{{ search }}">
+            <button type="submit">Search</button>
+        </form>
+
+        <div style="max-height: 70vh; overflow-y: auto;">
+            <table id="datatablesSimple" class="table">
+                <thead>
+                    <tr>
+                    <th>IdP</th>
+                    <th>Titre</th>
+                    <th>Niveau</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Image</th>
+                    <th>Actions</th>                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for program in pagination %}
+
+                        <tr>
+                            <td>{{ program.idP }}</td>
+                            <td>{{ program.titre }}</td>
+                            <td>{{ program.niveau }}</td>
+                            <td>{{ program.description }}</td>
+                            <td>{{ program.prix }}</td>
+                            <td>
+                                <img src="{{ asset('uploads/images/' ~ program.image) }}" width="250" height="150">
+                            </td>
+                            <td>
+
+<a href="{{ path('app_program_choisir', {'id': program.idP}) }}" class="btn btn-primary choose-program" onclick="showAlert('{{ program.titre }}')">Choose Program</a>
+                                <a href="{{ path('app_payment1') }}" class="btn btn-primary choose-program">Pay Now</a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                 
+
+
+
+                                                    <a href="{{ path('app_program_abon', {'id': 99}) }}" class="btn btn-primary choose-program">ABON</a>
+                    <!-- 99 7ot fi blasetha id te3 session user bech ki tenzel 3la les activite dont je suis abonné y5arejlek les activites li el user connecté abonne lihom -->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+ <script>
+        function showAlert(titre) {
+            alert("Vous avez choisi ce programme : " + titre);
+        }
+    </script>
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </ul>
+</nav>
+{% endblock %}
