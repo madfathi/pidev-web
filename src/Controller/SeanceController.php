@@ -281,11 +281,7 @@ return $response;
                 return $this->redirectToRoute('app_seance_i', [], Response::HTTP_SEE_OTHER);
             }
         }
-        $smsGenerator= new SmsGenerator();
-        $tel =122; 
-        $number=26577855;
-        $number_test=$_ENV['twilio_to_number'];
-        $smsGenerator->sendSms($number_test , '$tel', '$number');
+       
       
 
         return $this->render('seance/form.html.twig', [

@@ -34,15 +34,14 @@ class MailerController extends AbstractController
         // Set the HTML part using a Twig template
         $email->subject('SUCCESSFUL RESERVATION!');
       $email->html('
-    <h1 style="color: #fff300; background-color: #0073ff; width: 500px; padding: 16px 0; text-align: center; border-radius: 50px;">
-        YOUR RESERVATION is SUCCESSFUL
-    </h1>
-    <img src="public/Photos/active-body-exercise-2294353.jpg" style="width: 600px; border-radius: 50px">
-    <br>
-    <img src="photos/active-body-exercise-2294353.jpg" style="width: 600px; border-radius: 50px">
-    <h1 style="color: #ff0000; background-color: #5bff9c; width: 500px; padding: 16px 0; text-align: center; border-radius: 50px;">
-        THANK YOU
-    </h1>
+      <h1>Hi! Welcome to Powerfit thank you for registration!</h1>
+      <p>
+        
+      
+      </p>
+      <p>
+          Cheers!
+      </p>
 ');
         // Alternatively, you can set the text part using a Twig template
         // $email->text($this->renderView('emails/signup.txt.twig', [

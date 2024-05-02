@@ -14,6 +14,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Mailer\MailerInterface;
+use App\Service\SmsGenerator;
+use Knp\Component\Pager\PaginatorInterface;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
@@ -33,13 +35,17 @@ class ReservationController extends AbstractController
     ]);
 }
 #[Route('/reserva', name: 'app_reserv_i', methods: ['GET'])]
-public function reserver(): Response
+public function reserver(Request $request, PaginatorInterface $paginator): Response
 {
+    $query = $this->getDoctrine()->getRepository(Seance::class)->createQueryBuilder('s')->getQuery();
 
-    $repository= $this->getDoctrine()->getRepository(Seance::class)->findAll();
- 
-    return $this->render('Reservation/form.html.twig',['seances'=>$repository,
-]);
+    $pagination = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1), // Get the current page or default to 1
+        10 // Number of items per page
+    ); 
+
+    return $this->render('Reservation/form.html.twig', ['seances' => $pagination]);
 }
 #[Route('/makereserv', name: 'reservation_new', methods: ['GET', 'POST'])]
 public function new(Request $request,MailerController $mailer, MailerInterface $test): Response
@@ -92,8 +98,12 @@ public function new(Request $request,MailerController $mailer, MailerInterface $
 
        // $email = $form->get('fathimaddeh88@gmail.com')->getData();
        $result = $mailer->sendEmail($test);
+      
     }
+    $smsGenerator= new SmsGenerator();
    
+    $number_test=$_ENV['twilio_to_number'];
+    $smsGenerator->sendSms($number_test , 'admin', 'votre reservation success');
   
       
     return $this->render('Reservation/makereserve.html.twig', [
@@ -120,6 +130,7 @@ public function new3(Request $request,MailerController $mailer, MailerInterface 
     }
 
     $entityManager = $this->getDoctrine()->getManager();
+   
 
     // Load the corresponding Seance entity from the database based on the idSeance parameter
     $seance = $entityManager->getRepository(Seance::class)->find($idSeance);
@@ -147,8 +158,13 @@ public function new3(Request $request,MailerController $mailer, MailerInterface 
         $this->addFlash('message', 'le Voyage a bien ete ajouter ');
         return $this->redirectToRoute('app_reserv_i', [], Response::HTTP_SEE_OTHER);
         $mailer->sendEmail($test);
+       
     }
-
+    $smsGenerator= new SmsGenerator();
+    $tel =122; 
+    $number=26577855;
+    $number_test=$_ENV['twilio_to_number'];
+    $smsGenerator->sendSms($number_test , 'admin', 'votre reservation success');
     return $this->render('Reservation/makereservo.html.twig', [
         'form' => $form->createView(),
         'idSeance' => $idSeance, // Pass the idSeance variable to the template
