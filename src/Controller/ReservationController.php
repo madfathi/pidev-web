@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Seance;
 use App\Form\SeanceType;
 use App\Entity\Reservation;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Form\ReservationType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,15 @@ class ReservationController extends AbstractController
         return $this->render('reservation/index.html.twig', [
             'controller_name' => 'ReservationController',
         ]);
+    }
+
+
+
+    
+    #[Route('/main', name: 'app_main')]
+    public function index1(): Response
+    {
+        return $this->render('front55.html.twig');
     }
     #[Route('/readr', name: 'app_reservation_i', methods: ['GET'])]
     public function read(): Response
@@ -164,7 +174,7 @@ public function new3(Request $request,MailerController $mailer, MailerInterface 
     $tel =122; 
     $number=26577855;
     $number_test=$_ENV['twilio_to_number'];
-    $smsGenerator->sendSms($number_test , 'admin', 'votre reservation success');
+    
     return $this->render('Reservation/makereservo.html.twig', [
         'form' => $form->createView(),
         'idSeance' => $idSeance, // Pass the idSeance variable to the template

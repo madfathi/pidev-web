@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
  *
- * @ORM\Table(name="produit", indexes={@ORM\Index(name="categorie_id", columns={"categorie_id"}), @ORM\Index(name="idOffre", columns={"idOffre"})})
- * @ORM\Entity
+ * @ORM\Table(name="produit", indexes={@ORM\Index(name="categorie_id", columns={"categorie_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -22,16 +24,16 @@ class Produit
     private $idproduit;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="categorie_id", type="integer", nullable=false)
-     */
-    private $categorieId;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="nomProduit", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez entrer un nom de produit.")
+     * @Assert\Length(
+     *      min=5,
+     *      max=20,
+     *      minMessage="Le nom de produit doit comporter {{ limit }} caractères minimum.",
+     *      maxMessage="Le nom de produit doit comporter {{ limit }} caractères maximum."
+     * )
      */
     private $nomproduit;
 
@@ -39,6 +41,8 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
+     * @Assert\NotBlank(message="Veuillez entrer une quantité.")
+     * @Assert\GreaterThan(value=0, message="La quantité doit être supérieure à zéro.")
      */
     private $quantite;
 
@@ -46,6 +50,8 @@ class Produit
      * @var float
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="Veuillez entrer le prix.")
+     * @Assert\GreaterThan(value=0, message="Le prix doit être supérieur à zéro.")
      */
     private $prix;
 
@@ -57,27 +63,16 @@ class Produit
     private $imageproduit;
 
     /**
-     * @var int|null
+     * @var Categorie
      *
-     * @ORM\Column(name="idOffre", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="idCategorie")
      */
-    private $idoffre = NULL;
+    private $categorie;
 
     public function getIdproduit(): ?int
     {
         return $this->idproduit;
-    }
-
-    public function getCategorieId(): ?int
-    {
-        return $this->categorieId;
-    }
-
-    public function setCategorieId(int $categorieId): static
-    {
-        $this->categorieId = $categorieId;
-
-        return $this;
     }
 
     public function getNomproduit(): ?string
@@ -85,10 +80,9 @@ class Produit
         return $this->nomproduit;
     }
 
-    public function setNomproduit(string $nomproduit): static
+    public function setNomproduit(string $nomproduit): self
     {
         $this->nomproduit = $nomproduit;
-
         return $this;
     }
 
@@ -97,10 +91,9 @@ class Produit
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
-
         return $this;
     }
 
@@ -109,10 +102,9 @@ class Produit
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
-
         return $this;
     }
 
@@ -121,24 +113,20 @@ class Produit
         return $this->imageproduit;
     }
 
-    public function setImageproduit(string $imageproduit): static
+    public function setImageproduit(string $imageproduit): self
     {
         $this->imageproduit = $imageproduit;
-
         return $this;
     }
 
-    public function getIdoffre(): ?int
+    public function getCategorie(): ?Categorie
     {
-        return $this->idoffre;
+        return $this->categorie;
     }
 
-    public function setIdoffre(?int $idoffre): static
+    public function setCategorie(?Categorie $categorie): self
     {
-        $this->idoffre = $idoffre;
-
+        $this->categorie = $categorie;
         return $this;
     }
-
-
 }

@@ -4,3 +4,43 @@
 statistics:
     path: /statistics
     controller: App\Controller\SeanceController::statistics
+
+app_user_homee:
+    path : /homee
+    controller: 'App\Controller\UserController::indexHome2'  
+
+
+app_user_home:
+    path : /home
+    controller: 'App\Controller\UserController::indexHome'
+
+app_user_index:
+    path: /user/
+    controller: 'App\Controller\UserController::index'   
+    methods: ['GET']
+
+app_user_forUser:
+    path: /user/forUser
+    controller: 'App\Controller\UserController::indexUser'
+
+app_user_show:
+    path: /user/{id}
+    controller: App\Controller\UserController::show
+    requirements:
+        id: \d+  # Ensure the id parameter is a digit (integer)
+
+app_forgot_password_request:
+    path: /reset-password
+    controller: App\Controller\ResetPasswordController::request
+    methods: ['GET', 'POST']
+
+app_check_email:
+    path: /reset-password/check-email
+    controller: App\Controller\ResetPasswordController::checkEmail
+    methods: ['GET']
+
+app_reset_password:
+    path: /reset-password/reset/{token}
+    controller: App\Controller\SecurityController::resetpassword
+    methods: ['GET', 'POST']  
+

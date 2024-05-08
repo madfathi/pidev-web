@@ -4,12 +4,16 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection; // Ajoutez cette ligne
+use Doctrine\Common\Collections\Collection;
+
+
 
 /**
  * Reclamation
  *
- * @ORM\Table(name="reclamation", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_CE606404AEA34913", columns={"reference"})}, indexes={@ORM\Index(name="IDX_CE60640458E0A285", columns={"userid_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="reclamation")
+ * @ORM\Entity(repositoryClass="App\Repository\ReclamationRepository")
  */
 class Reclamation
 {
@@ -23,16 +27,9 @@ class Reclamation
     private $id;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="userid_id", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $useridId = NULL;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="reference", type="string", length=255, nullable=false)
+     * @ORM\Column(name="reference", type="string", length=255, nullable=false, unique=true)
      */
     private $reference;
 
@@ -67,7 +64,7 @@ class Reclamation
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaire", type="text", length=0, nullable=false)
+     * @ORM\Column(name="commentaire", type="text", nullable=false)
      */
     private $commentaire;
 
@@ -83,14 +80,14 @@ class Reclamation
      *
      * @ORM\Column(name="statut", type="string", length=255, nullable=false)
      */
-    private $statut;
+    private $statut = "En cours";
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="file", type="string", length=255, nullable=true)
      */
-    private $file = 'NULL';
+    private $file;
 
     /**
      * @var string
@@ -99,21 +96,9 @@ class Reclamation
      */
     private $tel;
 
-    public function getId(): ?int
+public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUseridId(): ?int
-    {
-        return $this->useridId;
-    }
-
-    public function setUseridId(?int $useridId): static
-    {
-        $this->useridId = $useridId;
-
-        return $this;
     }
 
     public function getReference(): ?string
@@ -121,7 +106,7 @@ class Reclamation
         return $this->reference;
     }
 
-    public function setReference(string $reference): static
+    public function setReference(string $reference): self
     {
         $this->reference = $reference;
 
@@ -133,7 +118,7 @@ class Reclamation
         return $this->nomD;
     }
 
-    public function setNomD(string $nomD): static
+    public function setNomD(string $nomD): self
     {
         $this->nomD = $nomD;
 
@@ -145,7 +130,7 @@ class Reclamation
         return $this->prenomD;
     }
 
-    public function setPrenomD(string $prenomD): static
+    public function setPrenomD(string $prenomD): self
     {
         $this->prenomD = $prenomD;
 
@@ -157,7 +142,7 @@ class Reclamation
         return $this->cin;
     }
 
-    public function setCin(int $cin): static
+    public function setCin(int $cin): self
     {
         $this->cin = $cin;
 
@@ -169,43 +154,47 @@ class Reclamation
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
+ 
     public function getCommentaire(): ?string
     {
         return $this->commentaire;
     }
 
-    public function setCommentaire(string $commentaire): static
+    public function setCommentaire(string $commentaire): self
     {
         $this->commentaire = $commentaire;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
+    
+    
+
     public function getStatut(): ?string
     {
         return $this->statut;
     }
 
-    public function setStatut(string $statut): static
+    public function setStatut(string $statut): self
     {
         $this->statut = $statut;
 
@@ -217,11 +206,18 @@ class Reclamation
         return $this->file;
     }
 
-    public function setFile(?string $file): static
+    public function setFile(?string $file): self
     {
         $this->file = $file;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->reference = uniqid();
+        $this->reference = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8);
+        $this->reponses = new ArrayCollection();
     }
 
     public function getTel(): ?string
@@ -229,12 +225,52 @@ class Reclamation
         return $this->tel;
     }
 
-    public function setTel(string $tel): static
+    public function setTel(string $tel): self
     {
         $this->tel = $tel;
 
         return $this;
     }
 
+    /**
+     * @var Collection<int, Reponse>
+     *
+     * @ORM\OneToMany(mappedBy="reclamation", targetEntity="App\Entity\Reponse")
+     */
+    private $reponses;
+
+   
+    // Vos autres méthodes...
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+            $reponse->setReclamation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getReclamation() === $this) {
+                $reponse->setReclamation(null);
+            }
+        }
+
+        return $this;
+    }
+    
 
 }

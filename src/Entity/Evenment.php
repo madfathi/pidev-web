@@ -2,8 +2,12 @@
 
 namespace App\Entity;
 
+use App\Repository\EvenmentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * Evenment
@@ -120,6 +124,25 @@ class Evenment
         $this->image = $image;
 
         return $this;
+    }
+
+
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="idEvent")
+     */
+    private $reviews;
+
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
     }
 
 

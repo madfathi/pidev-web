@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Client
@@ -21,6 +22,9 @@ class Client
      */
     private $idC;
 
+
+    #[Assert\NotBlank(message:"nom de client ne doit pas etre vide")] 
+
     /**
      * @var string
      *
@@ -28,6 +32,7 @@ class Client
      */
     private $nom;
 
+    #[Assert\NotBlank(message:"prenom de client ne doit pas etre vide")] 
     /**
      * @var string
      *
@@ -35,6 +40,7 @@ class Client
      */
     private $prenom;
 
+    #[Assert\NotBlank(message:"age de client ne doit pas etre vide")] 
     /**
      * @var int
      *
@@ -42,6 +48,7 @@ class Client
      */
     private $age;
 
+    #[Assert\NotBlank(message:"poids de client ne doit pas etre vide")] 
     /**
      * @var int
      *
@@ -49,6 +56,7 @@ class Client
      */
     private $poids;
 
+    #[Assert\NotBlank(message:"hauteur de client ne doit pas etre vide")] 
     /**
      * @var int
      *

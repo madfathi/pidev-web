@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\Client;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\ProgramRepository;
 
 /**
- * Program
- *
- * @ORM\Table(name="program", indexes={@ORM\Index(name="id_client", columns={"id_client"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ProgramRepository::class)
  */
 class Program
 {
+    
     /**
      * @var int
      *
@@ -21,12 +21,21 @@ class Program
      */
     private $idP;
 
+    #[Assert\NotBlank(message:"Le titre ne doit pas etre vide")] 
+
+    #[Assert\Length(max:20,maxMessage:"Le titre ne doit pas contenir plus que 20 caracteres")]
+    
     /**
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=255, nullable=false)
      */
     private $titre;
+
+    #[Assert\NotBlank(message:"niveau ne doit pas etre vide")] 
+    #[Assert\Length(max:20,maxMessage:"Le niveau ne doit pas contenir plus que 20 caracteres")]
+    
+
 
     /**
      * @var string
@@ -35,12 +44,27 @@ class Program
      */
     private $niveau;
 
+
+    #[Assert\NotBlank(message:"description ne doit pas etre vide")] 
+    #[Assert\Length(max:100,maxMessage:"Le niveau ne doit pas contenir plus que 20 caracteres")]
+    
+
+
+
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
+
+
+
+
+    #[Assert\NotBlank(message:"prix ne doit pas etre vide")] 
+    #[Assert\Length(max:20,maxMessage:"Le prix ne doit pas contenir plus que 20 caracteres")]
+    
+
 
     /**
      * @var int
@@ -49,6 +73,15 @@ class Program
      */
     private $prix;
 
+
+
+
+    
+    
+
+
+
+
     /**
      * @var string
      *
@@ -56,15 +89,37 @@ class Program
      */
     private $image;
 
-    /**
-     * @var \Client
-     *
-     * @ORM\ManyToOne(targetEntity="Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id_c")
-     * })
-     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /**
+ * @var \Client
+ *
+ * @ORM\ManyToOne(targetEntity="Client")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="id_client", referencedColumnName="id_c")
+ * })
+ */
+
+
     private $idClient;
+    
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="etat", type="integer", length=255, nullable=false, options={"default": 0})
+     */
+    private $etat = 0;
 
     public function getIdP(): ?int
     {
@@ -131,10 +186,11 @@ class Program
         return $this;
     }
 
-    public function getIdClient(): ?Client
-    {
-        return $this->idClient;
-    }
+    public function getIdClient()
+{
+    return $this->idClient;
+}
+
 
     public function setIdClient(?Client $idClient): static
     {
@@ -142,6 +198,14 @@ class Program
 
         return $this;
     }
-
+    
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+    public function setEtat(int $etat): void
+    {
+        $this->etat = $etat;
+    }
 
 }

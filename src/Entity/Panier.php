@@ -4,11 +4,10 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Repository\PanierRepository;
+
 /**
- * Panier
- *
- * @ORM\Table(name="panier")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=PanierRepository::class)
  */
 class Panier
 {
@@ -31,14 +30,14 @@ class Panier
     /**
      * @var string
      *
-     * @ORM\Column(name="nomp", type="string", length=50, nullable=false)
+     * @ORM\Column(name="nomp", type="string", length=254, nullable=false)
      */
     private $nomp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="img", type="string", length=50, nullable=false)
+     * @ORM\Column(name="img", type="string", length=254, nullable=false)
      */
     private $img;
 
@@ -50,11 +49,12 @@ class Panier
     private $pt;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="prod_id", type="integer", nullable=false)
+     * @ORM\Column(name="prod_id", type="string", length=100, nullable=false)
      */
     private $prodId;
+    
 
     public function getIdp(): ?int
     {
@@ -109,12 +109,12 @@ class Panier
         return $this;
     }
 
-    public function getProdId(): ?int
+    public function getProdId(): ?string
     {
         return $this->prodId;
     }
 
-    public function setProdId(int $prodId): static
+    public function setProdId(string $prodId): static
     {
         $this->prodId = $prodId;
 

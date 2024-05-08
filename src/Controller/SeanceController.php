@@ -189,7 +189,7 @@ return $response;
 }
 
 
-    #[Route('/backrechercheAjax', name: 'backrechercheAjax')]
+    #[Route('/backrechercheAjaxx', name: 'backrechercheAjaxx')]
     public function searchAjax(Request $request, SeanceRepository $seanceRepository): Response
     {
         $query = $request->query->get('q');
@@ -206,7 +206,7 @@ return $response;
 
         return $this->render('seance/calendar.html.twig');
     }
-    #[Route('/stat', name: 'stati')]
+    #[Route('/statis', name: 'stati')]
     public function statistiques(){
       
         return $this->render('seance/statistique.html.twig');

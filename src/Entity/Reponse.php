@@ -4,85 +4,72 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\ReponseRepository;
 
 /**
  * Reponse
  *
- * @ORM\Table(name="reponse", indexes={@ORM\Index(name="IDX_5FB6DEC72D6BA2D9", columns={"reclamation_id"}), @ORM\Index(name="IDX_5FB6DEC758E0A285", columns={"userid_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ReponseRepository::class)
  */
 class Reponse
 {
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column
+     * @Groups("reponse")
      */
-    private $id;
+    private  $id = null;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="reclamation_id", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(length=255)
+     * @Assert\NotBlank(message="ID utilisateur est obligatoire")
+     * @Groups("reponse")
      */
-    private $reclamationId = NULL;
+    private  $idUser = null;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="userid_id", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(length=255)
+     * @Assert\NotBlank(message="Note est obligatoire")
+     * @Assert\Length(
+     *      min=10,
+     *      minMessage="Entrer 10 caractères au minimum"
+     * )
+     * @Groups("reponse")
      */
-    private $useridId = NULL;
+    private $note = null;
 
     /**
-     * @var string
+     * @var \DateTimeInterface|null
      *
-     * @ORM\Column(name="id_user", type="string", length=255, nullable=false)
+     * @ORM\Column(type=Types::DATETIME_MUTABLE)
+     * @Groups("reponse")
      */
-    private $idUser;
+    private$createdAt = null;
 
     /**
-     * @var string
+     * @var Reclamation|null
      *
-     * @ORM\Column(name="note", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Reclamation", inversedBy="reponses")
      */
-    private $note;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
+    private  $Reclamation = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReclamationId(): ?int
+    public function setId(?int $id): self
     {
-        return $this->reclamationId;
-    }
-
-    public function setReclamationId(?int $reclamationId): static
-    {
-        $this->reclamationId = $reclamationId;
-
-        return $this;
-    }
-
-    public function getUseridId(): ?int
-    {
-        return $this->useridId;
-    }
-
-    public function setUseridId(?int $useridId): static
-    {
-        $this->useridId = $useridId;
-
+        $this->id = $id;
         return $this;
     }
 
@@ -91,10 +78,9 @@ class Reponse
         return $this->idUser;
     }
 
-    public function setIdUser(string $idUser): static
+    public function setIdUser(string $idUser): self
     {
         $this->idUser = $idUser;
-
         return $this;
     }
 
@@ -103,10 +89,9 @@ class Reponse
         return $this->note;
     }
 
-    public function setNote(string $note): static
+    public function setNote(string $note): self
     {
         $this->note = $note;
-
         return $this;
     }
 
@@ -115,12 +100,20 @@ class Reponse
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
+    public function getReclamation(): ?Reclamation
+    {
+        return $this->Reclamation;
+    }
 
+    public function setReclamation(?Reclamation $Reclamation): self
+    {
+        $this->Reclamation = $Reclamation;
+        return $this;
+    }
 }
