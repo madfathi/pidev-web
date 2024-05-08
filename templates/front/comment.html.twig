@@ -1,0 +1,241 @@
+{% extends 'baseE_front.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+
+{% block body %}
+<style>
+    .review-container {
+        max-width: 600px;
+        margin: 100px auto; /* Increase the top margin to move it further down */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Add position relative for the animation */
+        overflow: hidden; /* Hide overflow to prevent scrollbars */
+    }
+
+    .review-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #ffbf00, #007bff, #ffbf00, #007bff); /* Gradient colors */
+        background-size: 400% 400%; /* Larger background size for animation */
+        z-index: -1; /* Behind the content */
+        animation: animateGradient 10s ease infinite; /* Animation properties */
+    }
+
+    @keyframes animateGradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .review-container h1 {
+        color: #333;
+        text-align: center;
+    }
+
+    
+    .review-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        resize: none;
+    }
+
+    .review-form button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .review-form button:hover {
+        background-color: #0056b3;
+    }
+
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .header-section { /* Ensure header is at the top */
+        position: relative;
+        z-index: 1;
+        background-color: black; /* Add black background color */
+        color: white; /* Add white text color */
+    }
+    .footer-section { /* Ensure footer is at the bottom */
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+    }
+
+</style>
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="logo">
+                    <a href="./index.html">
+                        <img src="img/whitelogo.png" alt="">
+                    </a>
+                </div>
+            </div>
+          <div class="col-lg-6">
+                    <nav class="nav-menu">
+                        <ul>
+            
+                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="{{ path('app_reserv_i') }}">Reservation</a></li>
+                            <li class="active"><a href="{{ path('display_front') }}">Events</a></li>
+                            <li ><a href="{{ path('app_client_newF') }}">coaching</a></li>
+                           
+                            <li  ><a href="{{ path('app_produit_front') }}">Produits</a>
+                                <ul class="dropdown">
+                                    <li><a href="{{ path('app_cart') }}">Checkout</a></li>
+                                 
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('app_logout') }}">LOGOUT</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            <div class="col-lg-3">
+                <div class="top-option">
+                    <div class="to-search search-switch">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="to-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas-open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+
+
+
+
+<div class="review-container">
+    <h1>Add Review</h1>
+
+  
+
+
+    {# Render the form for the review description only #}
+    {{ form_start(form, {'attr': {'class': 'review-form'}}) }}
+    {{ form_row(form.description, {'attr': {'rows': 5, 'placeholder': 'Enter your review...', 'required': 'required'}}) }}
+    <button type="submit">Submit</button>
+    {{ form_end(form) }}
+</div>
+
+
+
+
+
+
+
+
+  <!-- Footer Section Begin -->
+<footer class="footer-section" style="margin-top: auto;">
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="fs-about">
+                    <div class="fa-logo">
+                        <a href="#"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                    <div class="fa-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Useful links</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                        <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-recent">
+                        <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="copyright-text">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</footer>
+<!-- Footer Section End -->
+
+{% endblock %}

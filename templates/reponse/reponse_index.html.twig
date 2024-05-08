@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réponses{% endblock %}
+
+{% block content %}
+<div class="row">
+<div  style="display: flex;align-items: center;justify-content: center;margin-top: 80px; padding:45px; margin-left: 260px; padding:45px;  ">
+
+<div class="card-body">
+
+    <h1>Liste des réponses</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+       <th scope="col">idUser</th>
+      <th scope="col">Date et heure </th>
+     <th scope="col">Note</th>
+     <th scope="col">Référence réclamation</th>
+     <th scope="col">Actions</th>
+    </tr>
+  </thead>
+    <tbody>
+  {% for reponse in reponses %}
+
+    <tr>
+       <td>{{ reponse.idUser}}</td>
+                   <td>{{ reponse.createdAt|date('Y-m-d     H:i')}}</td>
+                    <td>{{ reponse.note }}</td>
+                  <td>{{ reponse.reclamation.reference ?? 'N/A' }}</td>
+                 
+   
+                  
+
+                   
+                    <td>
+                 
+                   <button class="btn btn-success" onclick="window.location.href='{{ path('reponse_edit', {'id': reponse.id}) }}'">Modifier</button>
+                   
+
+ 
+    <a href="{{ path('reponse_delete', {'id': reponse.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réclamation ?')">Supprimer</a>
+                    </td>
+                </tr>
+                  </tbody>
+            {% endfor %}
+        </tbody>
+    </table>
+
+   
+   
+  
+         </div>
+      </div>
+    
+</div>
+
+{% endblock %}

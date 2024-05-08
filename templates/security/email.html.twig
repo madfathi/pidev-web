@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Request</title>
+</head>
+<body>
+    <h1>Password Reset Request</h1>
+    
+    <p>Hello {{ user.username }},</p>
+    
+    <p>We received a request to reset your password. If you didn't make this request, you can safely ignore this email.</p>
+    
+    <p>To reset your password, click the following link:</p>
+    <a href="{{ resetToken }}">Reset Password</a>
+    
+    <p>If the above link doesn't work, copy and paste the following URL into your web browser:</p>
+    <p>{{ resetLink }}</p>
+    
+    <p>This link is valid for 1 hour.</p>
+
+    <p>Thank you,</p>
+    <p>Your Powerfit Team</p>
+    
+    <p>If you need assistance, please contact us at support@powerfit.com.</p>
+</body>
+</html>

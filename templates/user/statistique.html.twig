@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block title %}Calendrier{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block body %}
+  
+  <div class="container">
+    <h1>Statistiques</h1>
+    <canvas id="roles" width="400" height="100"></canvas>
+
+</div>
+
+ {% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<script>
+  let roles = document.querySelector("#roles")
+
+  let typeGraph = new Chart(roles, {
+        type: "bar",
+        data: {
+            labels:[],
+            datasets:[{
+                label:"repartition des roles",
+                data:[],
+             backgroundColor: [
+    'rgba(255, 99, 132, 0.6)', // Red
+    'rgba(54, 162, 235, 0.6)', // Blue
+    'rgba(255, 206, 86, 0.6)', // Yellow
+    'rgba(75, 192, 192, 0.6)', // Teal
+    'rgba(153, 102, 255, 0.6)', // Purple
+    'rgba(255, 159, 64, 0.6)', // Orange
+    'rgba(255, 0, 0, 0.6)', // Dark Red
+    // Add more colors as needed
+]
+            }]
+        }
+    });
+
+  fetch('/statistics')
+       .then(response => response.json())
+       .then(data => {
+           let labels = Object.keys(data); // Utiliser les types de roles comme labels
+           let values = Object.values(data); // Utiliser les valeurs des statistiques
+
+           // Mettre à jour les labels et les données du graphique
+           typeGraph.data.labels = labels;
+           typeGraph.data.datasets[0].data = values;
+
+           // Mettre à jour le graphique
+           typeGraph.update();
+       })
+       .catch(error => {
+           console.error('Erreur lors de la récupération des statistiques :', error);
+       });
+</script>
+{% endblock %}
+
+
+  {% block formUserType %}
+ {% endblock %}
+  {% block bodyse %}
+ {% endblock %}

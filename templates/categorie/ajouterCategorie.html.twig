@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/back/assets/css/styles.css">  
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <!-- partial:partials/_sidebar.html -->
+       <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">Dashboard</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                             {# <a class="nav-link" href="{{ path('dashboard') }}"> #}
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Actions</div>
+                            <!-- Produit Ajouter Link -->
+                           <a class="nav-link" href="{{ path('app_produit_ajouter') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                                Ajouter Produit
+                            </a>
+                            <!-- Categorie Ajouter Link -->
+                            <a class="nav-link" href="{{ path('app_categorie_ajouter') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
+                                Ajouter Catégorie
+                            </a>
+                             <a class="nav-link" href="{{ path('app_comande') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
+                                Ajouter commande
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                </div>
+        <!-- partial -->
+        <!-- Main Content -->
+            <div id="layoutSidenav_content">
+                <!-- Page Content goes here -->
+                <main>
+                    <!-- Content Wrapper -->
+                    <div class="content-wrapper">
+                        <!-- Your Page Content Here -->
+                        <div class="row">
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Ajouter catégorie</h4>
+                    <p class="card-description"></p>
+                   {% block body %}
+                   
+                  {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                   <div class="form-group" >
+                   {{ form_label(form.nomcategorie, 'Nom de catégorie', {'attr': {'class': 'form-control-label'}}) }}
+                   {{ form_widget(form.nomcategorie, {'attr': {'class': 'form-control', 'placeholder': 'Nom de catégorie'}}) }}
+                   {{ form_errors(form.nomcategorie) }}
+                   </div>
+                   <div class="form-group">
+                   {{ form_label(form.imagecategorie, 'Image', {'attr': {'class': 'form-control-label'}}) }}
+                   {{ form_widget(form.imagecategorie, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(form.imagecategorie) }}
+                   </div>
+                   <button type="submit" class="btn btn-primary">Ajouter</button>
+                   {{ form_end(form) }}
+                   {% endblock %}
+                  </div>
+                </div>
+              </div>
+              </div>
+                   <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Liste des catégories</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                </label>
+                              </div>
+                            </th>
+                            <th> Nom Categorie </th>
+                            <th> Image Categorie </th>
+                            <th> Actions </th>
+                          </tr>
+                        </thead>
+       <tbody>
+    {% for categorie in categories %}
+  <tr>
+    <td>
+      <div class="form-check form-check-muted m-0">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+        </label>
+      </div>
+    </td>
+    <td>{{ categorie.nomcategorie }}</td>
+    <td>
+      {% if categorie.imagecategorie %}
+        <img src="{{ asset('images/' ~ categorie.imagecategorie) }}" alt="Image" style="width: 200px; height: auto;">
+      {% else %}
+        Aucune image
+      {% endif %}
+    </td>
+    <td>
+     <form action="{{ path('app_categorie_supprimer', {'id': categorie.idcategorie}) }}" style="display: inline;"> 
+     <button type="submit" class="btn btn-primary">Delete</button>
+     </form>
+    <form action="{{ path('app_categorie_edit', {'id': categorie.idcategorie}) }}" style="display: inline;"> 
+     <button type="submit" class="btn btn-primary">Edit</button>
+      </form>
+      </td>
+      </tr>
+         {% endfor %}
+      </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                    </div>
+                </main>
+
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+           <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+            </div>
+          </footer>
+
+           {# <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller --> #}
+    <!-- plugins:js -->
+    <script src="back/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    {# <!-- Plugin js for this page -->
+    <script src="back/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="back/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="back/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="back/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="back/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="back/assets/js/off-canvas.js"></script>
+    <script src="back/assets/js/hoverable-collapse.js"></script>
+    <script src="back/assets/js/misc.js"></script>
+    <script src="back/assets/js/settings.js"></script>
+    <script src="back/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="back/assets/js/dashboard.js"></script>
+    <!-- End custom js for this page -->  #}
+  </body>
+</html>

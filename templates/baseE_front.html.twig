@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/flaticon.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/barfiller.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+      
+    {% endblock %}
+</head>
+<body>
+    {% block header %}{% endblock %}
+    {% block body %} {% endblock %}
+    {% block footer %}{% endblock %}
+    {% block javascripts %}
+    <!-- Js Plugins -->
+    <script src="{{asset('jss/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('jss/bootstrap.min.js')}}"></script>
+    <script src="{{asset('jss/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('jss/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('jss/jquery.barfiller.js')}}"></script>
+    <script src="{{asset('jss/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('jss/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('jss/main.js')}}"></script>
+    {% endblock %}
+</body>
+</html>

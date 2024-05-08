@@ -1,0 +1,91 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+
+{% block header %}
+
+
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/styleseance.css') }}">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <style>
+        /* Your additional styles here */
+        .action-button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 10px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 0px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .show-button {background-color: #4CAF50;} 
+        .show-button:hover {background-color: #45a049;}
+
+        .edit-button {background-color: #008CBA;} 
+        .edit-button:hover {background-color: #0073e6;}
+
+        .delete-button {background-color: #f44336;} 
+        .delete-button:hover {background-color: #e60000;}
+    </style>
+{% endblock %}
+
+
+{% block formSeance %}
+
+{% endblock %}
+
+{% block contentsq %}
+    <h1>Client index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdC</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                <th>Poids</th>
+                <th>Hauteur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.idC }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.age }}</td>
+                <td>{{ client.poids }}</td>
+                <td>{{ client.hauteur }}</td>
+                <td>
+                    <form action="{{ path('app_client_show', {'idC': client.idC}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="action-button show-button">Show</button>
+                        </form>
+                        <form action="{{ path('app_client_edit', {'idC': client.idC}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="action-button edit-button">edit</button>
+                        </form>
+
+                       
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_client_new') }}">Create new</a>
+{% endblock %}

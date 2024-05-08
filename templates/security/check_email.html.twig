@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Check Email{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Check Your Email</div>
+
+                    <div class="card-body">
+                        {% if resetToken %}
+                            <p>An email has been sent to your email address with instructions on how to reset your password.</p>
+                            <p>If you don't see the email within a few minutes, please check your spam folder.</p>
+                        {% else %}
+                            <p>It seems that you have arrived here directly without requesting a password reset. If you need to reset your password, please use the forgot password form.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

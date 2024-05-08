@@ -1,0 +1,61 @@
+{% extends 'baseClient.html.twig' %}
+
+
+
+
+{% block body %}
+
+
+   
+<div style="margin: 100px auto;">
+
+    {% if form is defined %}
+        {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+
+        <div class="container">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-floating">
+                                {{ form_row(form.nom, {'label': 'Last Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your last name'}}) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-floating">
+                                {{ form_row(form.prenom, {'label': 'First Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your first name'}}) }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-floating">
+                                {{ form_row(form.age, {'label': 'Age', 'attr': {'class': 'form-control', 'placeholder': 'Enter your age'}}) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-floating">
+                                {{ form_row(form.poids, {'label': 'Weight (kg)', 'attr': {'class': 'form-control', 'placeholder': 'Enter your weight'}}) }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-floating">
+                                {{ form_row(form.hauteur, {'label': 'Height (cm)', 'attr': {'class': 'form-control', 'placeholder': 'Enter your height'}}) }}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+        {{ form_end(form) }}
+    {% endif %}
+
+</div>
+ 
+
+{% endblock %}

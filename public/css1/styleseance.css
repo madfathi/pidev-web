@@ -1,0 +1,70 @@
+/* Use flexbox to align items */
+.container {
+   
+    width:50%;
+    align-items: flex-start; /* Align items at the start of the cross axis */
+    margin-top: 0px; /* Ajoute un espace en haut du bloc bodyse */
+    margin-right: 200px; 
+   
+}
+.form-control.date-picker {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(255, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+/* Styles for when the date field is focused */
+.form-control.date-picker:focus {
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: 0 0 6px rgba(102, 175, 233, 0.5);
+}
+/* Adjust the margin of the form container */
+.form-container {
+    order: -1; /* Move this element to the top */
+    margin-bottom: 20px; /* Add space between the form and the image */
+    margin-left: -40px;  /* Add some space between the image and the form */
+    flex: 1;
+}
+.image-container img {
+    max-width: 20px; /* Set the maximum width of the image */
+    height: auto; /* Maintain the aspect ratio */
+}
+/* Adjust the label styles */
+.custom-label {
+    margin-top: 10px; /* Adjust margin as needed */
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+    margin-right: 2px; /* Add some space between the label and the input */
+}
+
+/* Adjust the placeholder styles */
+.custom-placeholder::placeholder {
+    color: #999;
+    font-style: italic;
+    /* Remove margin-left to align the placeholder with the input */
+    margin-left:200px;
+width:40%;
+
+
+}
+
+/* Adjust input and textarea styles */
+
+button,
+input,
+textarea {
+ 
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%; /* Make inputs fill the available width */
+}
+.error-message {
+    color: red;
+}
+

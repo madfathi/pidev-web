@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier User{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-center mt-5 ">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Modifier un user :</h5>
+                    <!-- General Form Elements -->
+                    {{ form_start(form, {attr:{'novalidate':'novalidate'}}) }}                   
+                    <!---->
+
+<div class="mb-3">
+    <label for="roles" class="form-label">Role</label>
+ <select id="roles" name="roles[]" class="form-control" multiple>
+    {% for role in form.roles.vars.choices %}
+        <option value="{{ role.value }}" {% if user.roles|default([]) is iterable and role.value in user.roles %} selected {% endif %}>{{ role.label }}</option>
+    {% endfor %}
+</select>
+    {{ form_errors(form.roles) }}
+</div>
+
+<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+<button class="btn btn-secondary" onclick="window.location='{{ path('app_user_index') }}';">Retour</button>
+
+{{ form_end(form) }}
+                    <a href="{{ path('app_user_index') }}">back to list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

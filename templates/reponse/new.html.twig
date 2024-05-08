@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block title %}Repondre{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card" style="margin-top: 80px; padding: 30px;">
+      <div class="card-body">
+
+    <h1>Répondre</h1>
+
+    {{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+
+<div class="form-group">
+          {{ form_label(form.idUser, 'idAdmin') }}
+          {{ form_widget(form.idUser, {'attr': {'class': 'form-control'}}) }}
+          <div style="color:red"> {{ form_errors(form.idUser,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+           </br>  
+
+         <div class="form-group">
+          {{ form_label(form.note) }}
+          {{ form_widget(form.note, {'attr': {'class': 'form-control'}}) }}
+           <div style="color:red"> {{ form_errors(form.note,{'attr':{'class':'text-danger'}}) }}</div>
+        </div>
+
+            </br>    
+               
+     <div class="form-group text-center">
+          <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+        </div>
+    {{ form_end(form) }}
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

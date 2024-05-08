@@ -1,0 +1,111 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="forms-container">
+        <div class="signin-signup">  
+         {{ form_start(registrationForm,{attr:{novalidate:'novalidate'}}) }}
+            <form action="#" class="sign-up-form">
+                <h2 class="title">Sign up</h2>
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">     
+                        <label for="urlImage" class="form-label">Votre image</label>
+                        {{ form_widget(registrationForm.urlImage, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.urlImage) }}
+                    </div>
+                </div>
+
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">     
+                        <label for="CIN" class="form-label">Votre CIN</label>
+                        {{ form_widget(registrationForm.cin, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.cin,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">     
+                        <label for="Nom" class="form-label">Votre Nom</label>
+                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.nom,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">     
+                        <label for="Prenom" class="form-label">Votre Prenom</label>
+                        {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.prenom,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Votre username</label>
+                        {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.username,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <div class="mb-3">
+                        <label for="E-mail" class="form-label">Votre adresse email</label>
+                        {{ form_widget(registrationForm.addEmail, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.addEmail,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        {{ form_widget(registrationForm.plainPassword, {'label': 'Password', 'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors (registrationForm.plainPassword,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                </div>
+
+
+                {# Champ de rôle invisible avec la valeur par défaut "ROLE_USER" #}
+                {{ form_widget(registrationForm.roles, {'value': 'ROLE_USER', 'attr': {'style': 'display: none;'}}) }}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg my-3">Sign UP</button>
+                <button class="btn btn-secondary" onclick="window.location='{{ path('app_login') }}';">Sign up</button>
+            
+                {{ form_end(registrationForm) }} 
+            </form>
+        </div>
+    </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<!--AUTH-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.querySelector(".container");
+        // Check if the current URL contains "/register" or "/login" and apply the appropriate class
+        if (window.location.pathname.includes("/register")) {
+            container.classList.add("sign-up-mode");
+            container.classList.remove("sign-in-mode");
+        } else if (window.location.pathname.includes("/login")) {
+            container.classList.add("sign-in-mode");
+            container.classList.remove("sign-up-mode");
+        }
+
+    });
+</script>
+{% endblock %}

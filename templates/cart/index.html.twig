@@ -1,0 +1,64 @@
+
+           
+{% extends 'base55.html.twig' %}
+ 
+            
+{% block title %}Votre panier{% endblock %}
+
+
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </section>
+    <a href="{{ path ('app_produit') }}"class="order_online">
+                Produit
+              </a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for elements in cart %}
+                <tr>
+                    <td>{{ elements.name }}</td>
+                    <td class="text-end">{{ elements.price }} DT</td>
+                    <td> {{  elements.quantity }}</td>
+                    <td>{{  elements.total }}</td>
+                    
+                    <td><a href="{{ path ('cart_remove', {'id':elements.id}) }}" class="btn btn-danger">Supprimer</a>
+                    <a href="{{ path ('cart_add', {'id':elements.id}) }}" class="btn btn-success">ajouter</a></td>
+                    
+                   
+                   
+                    
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Votre panier est vide</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+        <tfoot>
+            <tr>
+               
+                <td>Total Cart: {{ app.session.get('totalCart') }}</td>
+                <td>
+                    <a href="" class="btn btn-danger">
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <a href="{{ path ('create_order') }}" class="btn btn-success">ajouter</a></td>
+    {{dump()}}
+    
+{% endblock %}
