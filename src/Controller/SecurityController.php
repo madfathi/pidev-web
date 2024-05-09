@@ -33,22 +33,16 @@ class SecurityController extends AbstractController
     public function login(Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $session): Response
     {
         if ($this->getUser()) {
-            return new RedirectResponse($this->generateUrl('app_user_home'));
+            return new RedirectResponse($this->generateUrl('app_main'));
         }
     
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        $username = $request->request->get('username');
-        $password = $request->request->get('password');
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $username]);
-        $user2 = $this->getDoctrine()->getRepository(User::class)->findOneBy(['password' => $password]);
-
-        if ($user && $user2) {
-            $iduser = $user->getIduser();
-               $session->set('iduser', $iduser);
-        // Stocker les informations de l'utilisateur dans la session
       
-        }
+      
+
+
+
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error

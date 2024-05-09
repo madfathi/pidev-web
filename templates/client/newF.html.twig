@@ -17,14 +17,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div class="form-floating">
-                                {{ form_row(form.nom, {'label': 'Last Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your last name'}}) }}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-floating">
-                                {{ form_row(form.prenom, {'label': 'First Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your first name'}}) }}
-                            </div>
+                          <div class="form-floating">
+    {{ form_row(form.nom, {'label': 'Last Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your last name', 'value': user.getNom()}}) }}
+</div>
+<div class="form-floating">
+    {{ form_row(form.prenom, {'label': 'First Name', 'attr': {'class': 'form-control', 'placeholder': 'Enter your first name', 'value': user.getPrenom()}}) }}
+</div>
                         </td>
                     </tr>
                     <tr>

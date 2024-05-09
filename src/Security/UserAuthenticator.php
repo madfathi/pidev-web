@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use App\Repository\UserRepository;
 
 
 class UserAuthenticator extends AbstractLoginFormAuthenticator
@@ -31,23 +31,28 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
 
     public const LOGIN_ROUTE = 'app_login';
-    
+    private $userRepository;
     private $urlGenerator;
 
-   public function __construct(UrlGeneratorInterface $urlGenerator, SessionInterface $session)
+   public function __construct(UrlGeneratorInterface $urlGenerator, SessionInterface $session,UserRepository $userRepository)
     {
         $this->urlGenerator = $urlGenerator;
         $this->session = $session;
+        $this->userRepository = $userRepository;
     }
 
 
 
-    public function authenticate(Request $request): Passport
+    public function authenticate(Request $request): PassportInterface
     {
         $username = $request->request->get('username', '');
-
+    
         $request->getSession()->set(Security::LAST_USERNAME, $username);
+    
+        $user = $this->userRepository->findOneBy(['username' => $username]);
 
+        $request->getSession()->set('user_id', $user->getId());
+    
         return new Passport(
             new UserBadge($username),
             new PasswordCredentials($request->request->get('password', '')),
@@ -59,27 +64,23 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     }
 
 
-
-
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
+        // Check if the user has ROLE_ADMIN
+        if ($token->getUser() && in_array('Admin', $token->getUser()->getRoles())) {
+            // Redirect admin users to the admin dashboard
+            return new  RedirectResponse ($this->urlGenerator->generate('app_user_homee'));
         }
-        $user = $token->getUser();
-        if(in_array('ADMIN', $user->getRoles(),true) 
-       
-        ){
-            return new RedirectResponse($this->urlGenerator->generate('app_main'));
+        
+        // Check if the user has ROLE_USER
+        if ($token->getUser() && in_array('ROLE_USER', $token->getUser()->getRoles())) {
+            // Redirect user users to the user dashboard
+            return new  RedirectResponse ($this->urlGenerator->generate('app_main'));
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_main'));
-        // For example:
-         
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // If no specific role matches, you can redirect to a default route
+        return new  RedirectResponse ($this->urlGenerator->generate('app_main'));
     }
-
-
     
     protected function getLoginUrl(Request $request): string
     {

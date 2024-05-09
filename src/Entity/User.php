@@ -340,17 +340,7 @@ public function setRoles(array $roles): self
         return $this;
     }
 
-    public function getreset_token(): ?string
-    {
-        return $this->reset_token;
-    }
-
-    public function setReset_Token(?string $reset_token): self
-    {
-        $this->reset_token = $reset_token;
-
-        return $this;
-    }
+   
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
@@ -390,14 +380,14 @@ public function setRoles(array $roles): self
         return $this->isVerified;
     }*/
 
-    public function getResetToken(): ?string
+    public function getReset_token(): ?string
     {
-        return $this->resetToken;
+        return $this->reset_token;
     }
 
-    public function setResetToken(?string $resetToken): self
+    public function setReset_token(?string $reset_token): self
     {
-        $this->resetToken = $resetToken;
+        $this->reset_token = $reset_token;
 
         return $this;
     }

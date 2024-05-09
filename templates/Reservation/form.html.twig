@@ -42,7 +42,7 @@
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="{{ path('app_main') }}">Home</a></li>
                 <li><a href="{{ path('app_seance_i') }}">Reservation</a></li>
                 <li><a href="./classes.html">Evenement</a></li>
                 <li><a href="./services.html">Services</a></li>
@@ -87,7 +87,7 @@
                     <nav class="nav-menu">
                         <ul>
             
-                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="{{ path('app_main') }}">Home</a></li>
                             <li class="active"><a href="{{ path('app_reserv_i') }}">Reservation</a></li>
                             <li><a href="{{ path('display_front') }}">Events</a></li>
                             <li><a href="{{ path('app_client_newF') }}">coaching</a></li>
@@ -149,13 +149,17 @@
                 <div class="col-lg-12">
                     <div class="section-title">
                         <span>Why chose us?</span>
-                        <h2>PUSH YOUR LIMITS FORWARD</h2>
+                        <h2>Choose Your Best Reservation</h2>
                     </div>
                 </div>
             </div>
              </div>
             <div class="container pt-5 team">
-  
+  {% if app.flashes('success') %}
+    <div class="alert alert-success">
+        Votre réservation a été effectuée avec succès.
+    </div>
+{% endif %}
   <div class="row">
   {% for seance in seances %}
     <div class="col-lg-4 col-sm-6">
@@ -284,6 +288,7 @@
         }, 1000);
     }
 }
+
 
 // Appel de la fonction pour chaque séance
 {% for seance in seances %}

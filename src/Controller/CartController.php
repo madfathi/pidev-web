@@ -146,15 +146,15 @@ public function remove(int $id,Request $request): Response
     #[Route('/create_order', name: 'create_order')]
 public function createOrder(Request $request, EntityManagerInterface $entityManager,SmsGenerator $smsGenerator,SessionInterface $session)
 {
-    $userId = $session->get('iduser');
-    $user = $entityManager->getRepository(User::class)->find($userId->getId());
+    $user_id = $this->get('session')->get('user_id');
+$user = $entityManager->getRepository(User::class)->find($user_id);
     $cart = $request->getSession()->get('cart', []);
 
   
     // Récupérer les informations de l'utilisateur depuis le formulaire (nom, prénom, email)
     $nom = $user->getNom();
-    $prenom = $user->getNom();;
-    $email =$user->getNom();
+    $prenom = $user->getPrenom();
+    $email =$user->getAddEmail();
     $panier= $cart;
     $tel =93237722; 
     $number=93237722;

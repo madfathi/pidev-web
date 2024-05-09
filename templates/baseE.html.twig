@@ -60,6 +60,7 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
+
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.html">
@@ -67,6 +68,68 @@
                                 Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
+<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReservation" aria-expanded="false" aria-controls="collapseLayoutsReservation">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    Reservation
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseLayoutsReservation" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ path('app_seance_i') }}">Seance</a>
+        <a class="nav-link" href="{{ path('app_reservation_i') }}">Reservation</a>
+    </nav>
+</div>
+
+<!-- Evenement section -->
+<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsEvenement" aria-expanded="false" aria-controls="collapseLayoutsEvenement">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    Evenement
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseLayoutsEvenement" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ path('display_evenment') }}">Evenement</a>
+    </nav>
+</div>
+
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsCoaching" aria-expanded="false" aria-controls="collapseLayoutsCoaching">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    Coaching
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseLayoutsCoaching" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ path('app_client_index') }}">Client</a>
+    </nav>
+</div>
+
+<!-- Utilisateur section -->
+<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsUtilisateur1" aria-expanded="false" aria-controls="collapseLayoutsUtilisateur1">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    Utilisateur
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseLayoutsUtilisateur1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ path('app_user_homee') }}">Utilisateur</a>
+    </nav>
+</div>
+
+<!-- Deuxième bloc Utilisateur -->
+<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsUtilisateur2" aria-expanded="false" aria-controls="collapseLayoutsUtilisateur2">
+    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+    Produits
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseLayoutsUtilisateur2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+        <a class="nav-link" href="{{ path('app_produit_ajouter') }}">Produits</a>
+    </nav>
+</div>
+
+
+
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Layouts

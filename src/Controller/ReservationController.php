@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Service\SmsGenerator;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Entity\User;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
@@ -54,11 +55,12 @@ public function reserver(Request $request, PaginatorInterface $paginator): Respo
         $request->query->getInt('page', 1), // Get the current page or default to 1
         10 // Number of items per page
     ); 
+    $this->addFlash('success', 'Votre réservation a été effectuée avec succès.');
 
     return $this->render('Reservation/form.html.twig', ['seances' => $pagination]);
 }
 #[Route('/makereserv', name: 'reservation_new', methods: ['GET', 'POST'])]
-public function new(Request $request,MailerController $mailer, MailerInterface $test): Response
+public function new(Request $request,MailerController $mailer, MailerInterface $test,PaginatorInterface $paginator): Response
 {
     $result = null;
    
@@ -99,28 +101,42 @@ public function new(Request $request,MailerController $mailer, MailerInterface $
 
     $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        $entityManager->persist($reservation);
-        $entityManager->flush();
-        $this->addFlash('message', 'le Voyage a bien ete ajouter ');
-      
-        return $this->redirectToRoute('app_reserv_i', [], Response::HTTP_SEE_OTHER);
+    $user_id = $this->get('session')->get('user_id');
+    $user = $entityManager->getRepository(User::class)->find($user_id);
+
+ $reservatio = new Reservation();
+    $reservatio->setUsername($user->getNom());
+    $reservatio->setEmail($user->getAddEmail());
+    $reservatio->setTypeReservation(  $seance->getTypeSeance());
+    $numTlfn = intval($user->getNumTlfn());
+    $reservatio->setPhone($numTlfn);  
+    $reservatio->setIdSeance($seance);  
+ 
+  
+    $entityManager->persist( $reservatio);
+    $entityManager->flush();
 
        // $email = $form->get('fathimaddeh88@gmail.com')->getData();
        $result = $mailer->sendEmail($test);
       
-    }
+    
     $smsGenerator= new SmsGenerator();
    
     $number_test=$_ENV['twilio_to_number'];
     $smsGenerator->sendSms($number_test , 'admin', 'votre reservation success');
   
       
-    return $this->render('Reservation/makereserve.html.twig', [
-        'form' => $form->createView(),
-        'idSeance' => $idSeance,
-        'mailResult' => $result, // Pass the idSeance variable to the template
-    ]);
+    $query = $this->getDoctrine()->getRepository(Seance::class)->createQueryBuilder('s')->getQuery();
+
+    $pagination = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1), // Get the current page or default to 1
+        10 // Number of items per page
+    ); 
+    $this->addFlash('success', 'Votre réservation a été effectuée avec succès.');
+
+   
+    return $this->render('Reservation/form.html.twig', ['seances' => $pagination]);
 }
 #[Route('/test-email', name: 'test_email')]
 public function testEmail(MailerController $mailer, MailerInterface $test): Response
@@ -129,7 +145,7 @@ public function testEmail(MailerController $mailer, MailerInterface $test): Resp
     return new Response($result);
 }
 #[Route('/makereservt', name: 'reservation_neww', methods: ['GET', 'POST'])]
-public function new3(Request $request,MailerController $mailer, MailerInterface $test): Response
+public function new3(Request $request,MailerController $mailer, MailerInterface $test,PaginatorInterface $paginator): Response
 {
     $idSeance = $request->query->get('idSeance');
 
@@ -154,34 +170,45 @@ public function new3(Request $request,MailerController $mailer, MailerInterface 
    
 
     // Create a new instance of Reservation and assign the Seance to it
-    $reservation = new Reservation();
-    $reservation->setIdSeance($seance); // Make sure you have a setIdSeance method in your Reservation entity
+    $user_id = $this->get('session')->get('user_id');
+    $user = $entityManager->getRepository(User::class)->find($user_id);
 
-    // Create the form based on the reservation with the assigned Seance
-    $form = $this->createForm(ReservationType::class, $reservation);
+ $reservatio = new Reservation();
+    $reservatio->setUsername($user->getNom());
+    $reservatio->setEmail($user->getAddEmail());
+    $reservatio->setTypeReservation(  $seance->getTypeSeance());
+    $numTlfn = intval($user->getNumTlfn());
+    $reservatio->setPhone($numTlfn);  
+    $reservatio->setIdSeance($seance);  
+ 
+  
+    $entityManager->persist( $reservatio);
+    $entityManager->flush();
 
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        $entityManager->persist($reservation);
-        $entityManager->flush();
-        $this->addFlash('message', 'le Voyage a bien ete ajouter ');
-        return $this->redirectToRoute('app_reserv_i', [], Response::HTTP_SEE_OTHER);
-        $mailer->sendEmail($test);
-       
-    }
-    $smsGenerator= new SmsGenerator();
-    $tel =122; 
-    $number=26577855;
-    $number_test=$_ENV['twilio_to_number'];
+       // $email = $form->get('fathimaddeh88@gmail.com')->getData();
+       $result = $mailer->sendEmail($test);
+      
     
-    return $this->render('Reservation/makereservo.html.twig', [
-        'form' => $form->createView(),
-        'idSeance' => $idSeance, // Pass the idSeance variable to the template
-    ]);
+    $smsGenerator= new SmsGenerator();
+   
+    $number_test=$_ENV['twilio_to_number'];
+    $smsGenerator->sendSms($number_test , 'admin', 'votre reservation success');
+  
+      
+    $query = $this->getDoctrine()->getRepository(Seance::class)->createQueryBuilder('s')->getQuery();
+
+    $pagination = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1), // Get the current page or default to 1
+        10 // Number of items per page
+    ); 
+
+    return $this->render('Reservation/form.html.twig', ['seances' => $pagination]);
+
+   
 }
 #[Route('/makereserva', name: 'reservation_new2', methods: ['GET', 'POST'])]
-public function new2(Request $request): Response
+public function new2(Request $request,PaginatorInterface $paginator): Response
 {
     $idSeance = $request->query->get('idSeance');
 

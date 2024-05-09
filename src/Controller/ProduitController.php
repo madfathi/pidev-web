@@ -271,9 +271,12 @@ public function afficherFront(Request $request, Converter $converter, SessionInt
 #[Route('/produit/frontProduit/{id}', name: 'app_categorie_front')]
 public function produitsParCategorie(Request $request, $id, Converter $converter, SessionInterface $session): Response
 {
-    $userId = $session->get('iduser');
+   
+
+    $user_id = $this->get('session')->get('user_id');
+    
     // Récupérer l'utilisateur à partir de la session
-    $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
+    $user = $this->getDoctrine()->getRepository(User::class)->find( $user_id);
     $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(['categorie' => $id]);
     $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
     $prixEnEuros = []; // Tableau pour stocker les prix convertis en euros
